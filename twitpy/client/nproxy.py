@@ -22,7 +22,7 @@ class twitsend:
 		self.api = tweepy.API(auth)
 
 	def start(self, content):
-		self.api.update_status('content->' + str(random() * 100)+ content);
+		self.api.update_status('content->' + str(random() * 100)+ content)
 		print "it works"
 
 class TheProxy:
