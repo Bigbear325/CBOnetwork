@@ -8,6 +8,8 @@ auth.set_access_token(cipher.access_token, cipher.access_token_secret)
 
 api = tweepy.API(auth)
 
+api.update_status('tweepy + oauth!' + str(random() * 100))
+
 for i in range(0,10):
 #    rand = float(random() * 100)
 	api.update_status('tweepy + oauth!' + str(random() * 100))
