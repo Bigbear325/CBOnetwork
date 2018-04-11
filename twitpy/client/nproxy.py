@@ -14,7 +14,6 @@ class twitsend:
 
 		option 2. creat socket. but I'm not sure
     """
-
     def __init__(self):
         auth = tweepy.OAuthHandler(cipher.consumer_key, cipher.consumer_secret)
         auth.set_access_token(cipher.access_token, cipher.access_token_secret)
