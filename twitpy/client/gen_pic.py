@@ -3,6 +3,7 @@ import os, sys
 import math
 
 
+
 # currently we use gray pictures to make it easier
 def gen_pic(ori_file, save_file):
     pic = open(ori_file, 'rb')
@@ -34,8 +35,8 @@ def gen_pic(ori_file, save_file):
     img = Image.frombytes('L', (width, bi_len / width + 1), bi)
     img.save(save_file)
 
-ori_file_dir = "/Users/lzhimac/Documents/GitHub/file2pic/in"
-save_file_dir = "/Users/lzhimac/Documents/GitHub/file2pic/out"
+ori_file_dir = "/Users/lzhmbp/Documents/GitHub/CBOnetwork/twitpy/client/in"
+save_file_dir = "/Users/lzhmbp/Documents/GitHub/CBOnetwork/twitpy/client/out"
 
 files = os.listdir(ori_file_dir)
 file_names = []
