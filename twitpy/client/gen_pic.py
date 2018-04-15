@@ -2,14 +2,12 @@ from PIL import Image
 import os, sys
 import math
 
-
-
 # currently we use gray pictures to make it easier
 def gen_pic(ori_file, save_file):
     pic = open(ori_file, 'rb')
     bi = pic.read()
 
-    # get the length of bi
+    #get the length of bi
     bi_len = len(bi)
 
     # convert to hex str
@@ -23,9 +21,9 @@ def gen_pic(ori_file, save_file):
 
     bi = str_len + bi
 
-    # pic size
-
-    width = int(math.sqrt(bi_len))
+    # pic size 720p Resolution: 1280x720
+    #width = int(math.sqrt(bi_len))
+    width = 426
     # add something to the end
     end_str = ""
     for i in range(bi_len):
@@ -33,8 +31,9 @@ def gen_pic(ori_file, save_file):
 
     bi = bi + end_str
 
-
-    img = Image.frombytes('L', (width, bi_len / width + 1), bi)
+    height = 240
+    #img = Image.frombytes('L', (width, bi_len / width + 1), bi)
+    img = Image.frombytes('L', (width, height), bi)
     img.save(save_file)
 
 ori_file_dir = "/Users/lzhmbp/Documents/GitHub/CBOnetwork/twitpy/client/in"
