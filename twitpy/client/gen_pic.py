@@ -23,6 +23,8 @@ def gen_pic(ori_file, save_file):
 
     bi = str_len + bi
 
+    # pic size
+
     width = int(math.sqrt(bi_len))
     # add something to the end
     end_str = ""
