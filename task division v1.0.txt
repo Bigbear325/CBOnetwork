@@ -1,0 +1,20 @@
+Task division:
+
+
+Send:
+1: QR Code
+2: Binary division to QR code module
+3: Display multi QR Code and slide show with in a time frame
+
+Read:
+
+1. recognition of single QR code
+2. recognition of multi QR code in a sequence
+3. recover pieces of binary and recover to file.
+
+
+Youtube:
+Live broadcasting desktop screen (instead of broadcast video file)
+
+Twitter:
+Done
