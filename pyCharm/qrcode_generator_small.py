@@ -10,7 +10,7 @@ import pyqrcode
 import subprocess
 
 
-CHUNK_SIZE = 1000
+CHUNK_SIZE = 500
 
 
 
@@ -50,7 +50,7 @@ def get_qrcode(source_file):
 
             # p = subprocess.Popen(["display", "/tmp/test.png"])
 
-            tmp = pyqrcode.create(encoded_chunk, error='L', version=27)
+            tmp = pyqrcode.create(encoded_chunk, error='L', version=17,mode='binary', encoding='base64')
             print(tmp.terminal())
             qr_code_list.append(tmp)
             print('chunk', counter)
