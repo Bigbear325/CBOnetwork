@@ -14,6 +14,9 @@ from selenium.webdriver.common.keys import Keys
 
 CONSUMER_KEY = '9oix7X1CGe0qTH5Iy0DHIy9D2'
 CONSUMER_SECRET = 'zyXMKSxY1YfyjX2ZSw1ZrJxALARj9Qe4EIEFC9X21EMFul8SY5'
+ACCESS_TOKEN = '979820330154889216-FAWxAwGKJgAxAOXN24CPvEhKa86w0o0'
+ACCESS_TOKEN_SECRET = '0e9obiLXcsNGpOPpJ8JrHu8YvbgNcvRysbpxI7omkA8Wh'
+
 
 
 def login(driver, my_email, my_password):
@@ -36,20 +39,23 @@ def open():
 
 
 def twit(message):
-    time.sleep(2)
+    time.sleep(1)
     message_box = driver.find_element_by_name("tweet")
     message_box.send_keys(message)
     message_box.send_keys(Keys.COMMAND, Keys.RETURN)
 
 
-def oauth_login(consumer_key, consumer_secret):
+def oauth_login(consumer_key, consumer_secret, access_token, access_token_secret):
     """Authenticate with twitter using OAuth"""
 
     auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
-    auth_url = auth.get_authorization_url()
 
-    verify_code = raw_input("Authenticate at %s and then enter you verification code here > " % auth_url)
-    auth.get_access_token(verify_code)
+    auth.set_access_token(access_token, access_token_secret)
+
+    # auth_url = auth.get_authorization_url()
+
+    # verify_code = raw_input("Authenticate at %s and then enter you verification code here > " % auth_url)
+    # auth.get_access_token(verify_code)
 
     return tweepy.API(auth)
 
@@ -61,9 +67,9 @@ def batch_delete(api):
     # if do_delete.lower() == 'yes':
     count = 0
     for status in tweepy.Cursor(api.user_timeline).items():
-        if count == 5:
-            break
-        count = count + 1
+        # if count == 5:
+        #     break
+        # count = count + 1
         try:
             api.destroy_status(status.id)
             print "Deleted:", status.id
@@ -73,18 +79,21 @@ def batch_delete(api):
 
 
 # random = random.randint(1,101)
-# driver = webdriver.Chrome('/usr/local/bin/chromedriver')
-# login(driver, my_email, my_password)
-# open()
-# count = 0
-# while(count < 1000):
-#     twit("this is an test message number: " + str(count))
-#     count = count + 1
+
 
 
 if __name__ == "__main__":
     #prepare
-    api = oauth_login(CONSUMER_KEY, CONSUMER_SECRET)
-    print "Authenticated as: %s" % api.me().screen_name
-
+    api = oauth_login(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
     batch_delete(api)
+    driver = webdriver.Chrome('/usr/local/bin/chromedriver')
+    login(driver, my_email, my_password)
+    open()
+    count = 0
+    while (count < 1000):
+        twit("hello this is an test message number: " + str(count))
+        count = count + 1
+        if count % 5 == 0:
+            time.sleep(2)
+            print "Authenticated as: %s" % api.me().screen_name
+            batch_delete(api)
