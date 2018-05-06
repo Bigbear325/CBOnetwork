@@ -51,17 +51,43 @@ def modify_account(driver, message):
 def randomword(length):
    return ''.join(random.choice(string.lowercase) for i in range(length))
 
+
+def post_comment(driver, message):
+    time.sleep(5)
+    post_message = driver.find_element_by_class_name('ql-editor ql-blank')
+    post_message.send_keys(message)
+    time.sleep(10)
+    post_message.submit()
+
+
+
+
+# def update_comment(driver, message):
+
 if __name__ == "__main__":
     driver = webdriver.Chrome('/usr/local/bin/chromedriver')
     login(driver, my_email, my_password)
 
-    open_page(driver, 'https://www.foxnews.com/community/auth/user/profile.html')
-    time.sleep(5)
-    print 'profile page loaded'
 
-    for i in range(0,300):
-        message = randomword(15)
-        print(message)
-        modify_account(driver, message)
-        print 'update success time %d : %s'% (i, message)
-        time.sleep(5)
+    open_page(driver, 'http://www.foxnews.com/opinion/2018/04/01/what-is-easter-and-why-do-christians-celebrate-this-holiday.html')
+    time.sleep(5)
+    print 'news page loaded'
+
+    message = randomword(15)
+    post_comment(driver, message)
+
+
+
+
+
+    # open_page(driver, 'https://www.foxnews.com/community/auth/user/profile.html')
+    # time.sleep(5)
+    # print 'profile page loaded'
+    # modify the profile name
+
+    # for i in range(0,300):
+    #     message = randomword(15)
+    #     print(message)
+    #     modify_account(driver, message)
+    #     print 'update success time %d : %s'% (i, message)
+    #     time.sleep(5)
