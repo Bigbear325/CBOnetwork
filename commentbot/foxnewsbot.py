@@ -1,6 +1,7 @@
 import time
 import random, string
 from foxprofile import my_email, my_password
+from bs4 import BeautifulSoup
 
 import tweepy
 
@@ -73,8 +74,39 @@ if __name__ == "__main__":
     time.sleep(5)
     print 'news page loaded'
 
-    message = randomword(15)
-    post_comment(driver, message)
+    driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+
+    page_html = driver.page_source
+    time.sleep(5)
+    # print source
+
+    # soup = BeautifulSoup(page_html, 'html')
+    #
+    # mydivs = soup.findAll("div", {"id": "commenting"})
+
+    comment_url = "https://spoxy-shard4.spot.im/v2/spot/sp_ANQXRpqH/post/44cb71eb-b87a-47aa-8156-8fe92bf8054f/?elementId=ba314173ff98020a17b6995ce616f0d4&amp;spot_im_platform=desktop&amp;host_url=http%3A%2F%2Fwww.foxnews.com%2Fopinion%2F2018%2F04%2F01%2Fwhat-is-easter-and-why-do-christians-celebrate-this-holiday.html&amp;host_url_64=aHR0cDovL3d3dy5mb3huZXdzLmNvbS9vcGluaW9uLzIwMTgvMDQvMDEvd2hhdC1pcy1lYXN0ZXItYW5kLXdoeS1kby1jaHJpc3RpYW5zLWNlbGVicmF0ZS10aGlzLWhvbGlkYXkuaHRtbA%3D%3D&amp;spot_im_ph__prerender_deferred=true&amp;prerenderDeferred=true&amp;sort_by=newest&amp;spot_im_ih__livefyre_url=44cb71eb-b87a-47aa-8156-8fe92bf8054f&amp;isStarsRatingEnabled=false&amp;enableMessageShare=true&amp;enableAnonymize=true&amp;isConversationLiveBlog=false&amp;enableSeeMoreButton=true"
+
+    driver.get(comment_url)
+    # post_msg = driver.find_element_by_css_selector('.ql-editor.ql-blank')
+    post_msg = driver.find_element_by_class_name("ql-editor ql-blank")
+    print 'class name finded!'
+    time.sleep(5)
+    btn = driver.find_element_by_css_selector(
+        "#root > div > div.sppre_conversation > div.sppre_rich-editor.sppre_expanded > div.sppre_rich-editor-container > div.sppre_panel > div > div.sppre_actions > button")
+
+    for i in range(0, 20):
+        message = randomword(20)
+        post_msg.send_keys(message)
+        btn.click()
+
+
+
+
+    # message = randomword(15)
+    # post_comment(driver, message)
+
+
+
 
 
 
