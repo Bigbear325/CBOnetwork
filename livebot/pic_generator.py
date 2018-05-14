@@ -1,7 +1,6 @@
 ''' this code will get in a file, read it, devide it into
-    pieces and covert it using base64, then generate multi qrcode
+    pieces and covert it into pictures
 '''
-
 from PIL import Image
 import os, sys
 import math
@@ -10,9 +9,6 @@ import pyqrcode
 import subprocess
 from tqdm import *
 import shutil
-
-
-CHUNK_SIZE = 1464 
 
 
 def file2pics(ori_file, save_file):
