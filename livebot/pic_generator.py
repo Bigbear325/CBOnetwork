@@ -27,7 +27,7 @@ def file2pics(ori_file, save_file):
         cur = int(hex_len[i:i + 2], 16)
         str_len += chr(cur)
     bi = str_len + bi
-    width = int(math.sqrt(bi_len))
+    width = 256
     # add something to the end
     end_str = ""
     for i in range(bi_len):
